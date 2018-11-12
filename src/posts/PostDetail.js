@@ -8,6 +8,10 @@ class PostDetail extends Component {
         // this will allow us to get the props inside the method.
         this.myTitleWasClicked = this.myTitleWasClicked.bind(this);
         this.buttonClicked = this.buttonClicked.bind(this);
+        this.toggleContent = this.toggleContent.bind(this);
+        this.state = {
+            showContent: true
+        }
     }
 
     myTitleWasClicked(event){
@@ -18,6 +22,11 @@ class PostDetail extends Component {
         }
     }
 
+    toggleContent(event){
+        event.preventDefault();
+        this.setState({showContent: !this.state.showContent})
+    }
+
     buttonClicked(event){
         event.preventDefault();
         const displayButtonClicked = this.props.displayButtonClicked;
@@ -25,11 +34,16 @@ class PostDetail extends Component {
     }
     render() {
     const post = this.props.post;
+    const {showContent} = this.state;
+
     return (
         <div>
             <h4 onClick={this.myTitleWasClicked}>{post.title}</h4>
-            <p> {post.content}</p>
+            { showContent === true ? <p> {post.content}</p> : " " }
             <button onClick={this.buttonClicked}> click me </button>
+            { showContent === true ? <button onClick={this.toggleContent}> Hide information </button> :
+                <button onClick={this.toggleContent}> Show information </button>
+            }
         </div>
     );
     }
