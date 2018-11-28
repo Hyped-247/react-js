@@ -8,6 +8,7 @@ class PostList extends Component {
     // Create this for every method that you call inside your render method.
     this.handleDataCallBack = this.handleDataCallBack.bind(this)
     this.displayButtonClicked = this.displayButtonClicked.bind(this)
+    this.HandlePostRemove = this.HandlePostRemove.bind(this)
   }
   handleDataCallBack(textMsg){
     alert(textMsg);
@@ -16,6 +17,14 @@ class PostList extends Component {
   displayButtonClicked(textButtonMsg){
     alert(textButtonMsg);
   }
+  HandlePostRemove(postItem){
+      let currentPostList = this.state.postList;
+      currentPostList.pop(postItem);
+      this.setState({
+          postItem: currentPostList
+      })
+  }
+
   render() {
     return (
       <div>
@@ -24,6 +33,7 @@ class PostList extends Component {
               return <PostDetail
                   post={item}
                   key={index}
+                  didHandleRemove={this.HandlePostRemove}
                   dataCallBack={this.handleDataCallBack}
                   displayButtonClicked={this.displayButtonClicked}
               />;

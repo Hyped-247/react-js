@@ -9,10 +9,21 @@ class PostDetail extends Component {
         this.myTitleWasClicked = this.myTitleWasClicked.bind(this);
         this.buttonClicked = this.buttonClicked.bind(this);
         this.toggleContent = this.toggleContent.bind(this);
+        this.handleRemoveContentButton = this.handleRemoveContentButton.bind(this);
         this.state = {
             showContent: true
         }
     }
+
+    handleRemoveContentButton(event){
+        if (this.props.didHandleRemove){
+            this.props.didHandleRemove(this.props.post)
+
+        }
+
+
+    }
+
 
     myTitleWasClicked(event){
         event.preventDefault();
@@ -41,9 +52,10 @@ class PostDetail extends Component {
             <h4 onClick={this.myTitleWasClicked}>{post.title}</h4>
             { showContent === true ? <p> {post.content}</p> : " " }
             <button onClick={this.buttonClicked}> click me </button>
-            { showContent === true ? <button onClick={this.toggleContent}> Hide information </button> :
+            { showContent === true ? <button onClick={this.toggleContent}>Hide information </button> :
                 <button onClick={this.toggleContent}> Show information </button>
             }
+            <button onClick={this.handleRemoveContentButton}> Remove information </button>
         </div>
     );
     }
